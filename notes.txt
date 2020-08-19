@@ -2,23 +2,25 @@ CCUIContentModuleBackgroudnView
 
 CCUIScrollView -> subviews(only 1 UIView) -> subviews(only 1 CCUIModuleCollectionView) -> subviews(all the cc items)
 
+CCUIContentModuleContainerView -> subview -> subview -> subview -> gesture recognisers
 //
 
 CCUIContentModuleBackgroundView
 
 // i think i can do something related to amout of movement at 0,0 from the center the get the degrees from there
 
+CCUIControlCenterPositionProvider
+
 todo:
+allow for reorganising modules
 make cross remove module - make click on any part of module do this
-add button to add modules
-make the shake relate to amount moved not degrees moved
-
-
-change CCUIButtonModuleView gesture recogniser
-
+add button to add modules - look at quit all?
+change the behevior of clicking the button - swap properties?
 
 done:
 in and out animations
+change CCUIButtonModuleView gesture recogniser
+make the shake relate to amount moved not degrees moved
 move the animation and subview inside the module view class
 activate by holding on status bar
 get shake animation working
