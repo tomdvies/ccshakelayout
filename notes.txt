@@ -1,3 +1,10 @@
+/var/mobile/Library/ControlCenter/ModuleConfiguration_CCSupport.plist
+this is where cc support holds an ordered array with 
+
+-[CCUIModuleCollectionViewController orderedEnabledModuleIdentifiersChangedForSettingsManager:0x2804dece0]
+this is called when its updated in settings
+CCUIModuleSettingsManager is the class of the manager
+
 CCUIContentModuleBackgroudnView
 
 CCUIScrollView -> subviews(only 1 UIView) -> subviews(only 1 CCUIModuleCollectionView) -> subviews(all the cc items)
@@ -10,6 +17,16 @@ CCUIContentModuleBackgroundView
 // i think i can do something related to amout of movement at 0,0 from the center the get the degrees from there
 
 CCUIControlCenterPositionProvider
+
+
+// this will reload settings from the disk /var/mobile/Library/ControlCenter/ModuleConfiguration_CCSupport.plist
+CCUIModuleSettingsManager* manager = MSHookIvar<id>(CCUIModuleSettingsManager, "_settingsManager");
+RLog(@"%@",manager);
+[manager _loadSettings];
+[CCUIModuleSettingsManager orderedEnabledModuleIdentifiersChangedForSettingsManager:manager];
+
+
+
 
 todo:
 allow for reorganising modules
