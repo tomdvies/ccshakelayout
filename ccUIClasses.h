@@ -1,3 +1,5 @@
+//#import <RemoteLog.h>
+
 @interface SBXCloseBoxView : UIButton
 @end
 
