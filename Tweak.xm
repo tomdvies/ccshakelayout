@@ -68,15 +68,19 @@ float excc = 0;
 
 %new
 -(void)clickedRemoveButton{
+    // maybe show confirmation view?
+    // althogh if the adding units back system isnt to bad it might still work without
     RLog(@"ls");
     NSMutableDictionary *plistDic = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/ControlCenter/ModuleConfiguration_CCSupport.plist"];
     NSMutableArray* value = [plistDic objectForKey:@"module-identifiers"];
     [value removeObjectAtIndex:[value indexOfObject:self.moduleIdentifier]];
-    [plistDic writeToFile:@"/var/mobile/Library/ControlCenter/ModuleConfiguration_CCSupport.plist" atomically:YES];
     //RLog(@"%@", value[[value indexOfObject:self.moduleIdentifier]]); 
-    CCUIModuleSettingsManager* manager = MSHookIvar<id>(moduleViewController, "_settingsManager");
-    [manager _loadSettings];
-    [moduleViewController orderedEnabledModuleIdentifiersChangedForSettingsManager:manager];
+    //CCUIModuleSettingsManager* manager = MSHookIvar<id>(moduleViewController, "_settingsManager");
+    UIView* view = self;
+    [UIView animateWithDuration:0.2
+                     animations:^{view.transform = CGAffineTransformMakeScale(0.4, 0.4); view.alpha = 0.01;}
+                     completion:^(BOOL finished){[plistDic writeToFile:@"/var/mobile/Library/ControlCenter/ModuleConfiguration_CCSupport.plist" atomically:YES];
+    }];
 }
 
 %new
@@ -153,9 +157,10 @@ float excc = 0;
 
 - (void)viewWillAppear:(_Bool)arg1{
     if (arg1){
-        CCUIModuleSettingsManager* manager = MSHookIvar<id>(self, "_settingsManager");
-        [manager _loadSettings];
-        [self orderedEnabledModuleIdentifiersChangedForSettingsManager:manager];
+        CCUILayoutOptions* manager = MSHookIvar<id>(self, "_layoutOptions");
+        //[manager _loadSettings];
+        RLog(@"%@",manager);
+        //[self orderedEnabledModuleIdentifiersChangedForSettingsManager:manager];
         moduleViewController = self;
         //RLog(@"%@",[self _moduleInstances][0]);
         //RLog(@"%@",self.view.subviews);

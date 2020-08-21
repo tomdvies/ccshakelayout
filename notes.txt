@@ -19,20 +19,23 @@ CCUIContentModuleBackgroundView
 CCUIControlCenterPositionProvider
 
 
-// this will reload settings from the disk /var/mobile/Library/ControlCenter/ModuleConfiguration_CCSupport.plist
+// this will reload settings from the disk however there are notifiers for writing via objc so you don't need to reload when writing from objc 
+// /var/mobile/Library/ControlCenter/ModuleConfiguration_CCSupport.plist is the config file
 CCUIModuleSettingsManager* manager = MSHookIvar<id>(CCUIModuleSettingsManager, "_settingsManager");
 RLog(@"%@",manager);
 [manager _loadSettings];
 [CCUIModuleSettingsManager orderedEnabledModuleIdentifiersChangedForSettingsManager:manager];
 
 
-
+current:
+reformat code to make it less painful to read
 
 todo:
 allow for reorganising modules
-make cross remove module - make click on any part of module do this
+make cross remove module - make clicking on any part of module do this
 add button to add modules - look at quit all?
 change the behevior of clicking the button - swap properties?
+*maybe* animate modules reorganising but i think that will require mad levels of rewriting
 
 done:
 in and out animations
